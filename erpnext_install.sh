@@ -382,6 +382,20 @@ case "$erpnext_install" in
     sleep 1
 esac
 
+# Prompt user to confirm if they want to install CRM
+
+echo -e "${LIGHT_BLUE}Would you like to install CRM? (yes/no)${NC}"
+read -p "Response: " crm_install
+crm_install=$(echo "$crm_install" | tr '[:upper:]' '[:lower:]')
+case "$crm_install" in
+    "yes" | "y")
+    sleep 2
+    # Setup supervisor and nginx config
+    bench get-app crm --branch $bench_version && \
+    bench --site $site_name install-app crm
+    sleep 1
+esac
+
 # Dynamically set the Python version for the playbook file path
 python_version=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
 playbook_file="/usr/local/lib/python${python_version}/dist-packages/bench/playbooks/roles/mariadb/tasks/main.yml"
