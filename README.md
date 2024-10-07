@@ -21,6 +21,9 @@ Do not run this script as root as it will fail when setting up the site. If your
 1. Create a new user (you can change frappeuser to your preferred user name):
 ```
 sudo adduser frappeuser
+```
+This is how it will look
+```
 Full Name []: frappeuser
 Room Number []:
 Work Phone []:
